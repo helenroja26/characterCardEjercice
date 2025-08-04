@@ -1,0 +1,208 @@
+<template>
+  <div class="history-and-saves">
+    <button class="back-button" @click="$router.back()">← Volver</button>
+
+    <!-- Debug info -->
+    <div class="debug-info">
+      <p>Historia: {{ characterStore.history.length }} elementos</p>
+      <p>Guardados: {{ characterStore.favorites.length }} elementos</p>
+    </div>
+
+    <section class="history-section">
+      <h2>Historia</h2>
+      <div v-if="characterStore.history.length === 0" class="empty-state">
+        No hay personajes en el historial
+      </div>
+      <div v-else class="character-grid">
+        <div
+          v-for="character in characterStore.history"
+          :key="character.id"
+          class="character-card"
+          @click="goToDetail(character.id)"
+        >
+          <img :src="character.image" :alt="character.name" />
+          <h3>{{ character.name }}</h3>
+          <p>{{ character.species }} - {{ character.status }}</p>
+          <button
+            @click.stop="toggleFavorite(character)"
+            class="save-btn"
+            :class="{ 'is-saved': isFavorite(character.id) }"
+          >
+            {{ isFavorite(character.id) ? 'Guardado' : 'Guardar' }}
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="saves-section">
+      <h2>Guardados</h2>
+      <div v-if="characterStore.favorites.length === 0" class="empty-state">
+        No hay personajes guardados
+      </div>
+      <div v-else class="character-grid">
+        <div
+          v-for="character in characterStore.favorites"
+          :key="character.id"
+          class="character-card"
+          @click="goToDetail(character.id)"
+        >
+          <img :src="character.image" :alt="character.name" />
+          <h3>{{ character.name }}</h3>
+          <p>{{ character.species }} - {{ character.status }}</p>
+          <button
+            @click.stop="removeFromFavorites(character.id)"
+            class="remove-btn"
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { useCharacterStore } from '@/stores/character'
+import { useRouter } from 'vue-router'
+
+const characterStore = useCharacterStore()
+const router = useRouter()
+
+function goToDetail(characterId: number) {
+  router.push({ name: 'Detail', params: { id: characterId.toString() } })
+}
+
+function isFavorite(characterId: number): boolean {
+  return characterStore.favorites.some(c => c.id === characterId)
+}
+
+function toggleFavorite(character: any) {
+  if (isFavorite(character.id)) {
+    characterStore.removeFromFavorites(character.id)
+  } else {
+    const added = characterStore.addToFavorites(character)
+    if (!added) {
+      alert('Has alcanzado el límite de 10 favoritos.')
+    }
+  }
+}
+
+function removeFromFavorites(characterId: number) {
+  characterStore.removeFromFavorites(characterId)
+}
+</script>
+
+<style lang="scss" scoped>
+.history-and-saves {
+  padding: 2rem;
+  min-height: calc(100vh - 160px);
+
+  .back-button {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #290e8c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #190760;
+    }
+  }
+
+  .debug-info {
+    background: #ffe6e6;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #290e8c;
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    color: #666;
+    padding: 2rem;
+    font-style: italic;
+    background: #f5f5f5;
+    border-radius: 8px;
+  }
+
+  .character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .character-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      margin: 0.5rem 0;
+      color: #290e8c;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .save-btn, .remove-btn {
+      width: 100%;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .save-btn {
+      background-color: #2a74d7;
+      color: white;
+
+      &:hover {
+        background-color: #1f54a3;
+      }
+
+      &.is-saved {
+        background-color: #28a745;
+      }
+    }
+
+    .remove-btn {
+      background-color: #dc3545;
+      color: white;
+
+      &:hover {
+        background-color: #c82333;
+      }
+    }
+  }
+}
+</style>
