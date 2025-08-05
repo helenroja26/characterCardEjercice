@@ -72,7 +72,7 @@ onMounted(fetchCharacters)
   &__list {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     padding: 20px;
     gap: 20px;
     justify-items: center;

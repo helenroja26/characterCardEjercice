@@ -38,7 +38,6 @@ async function fetchCharacterData(characterId: string) {
     if (!resp.ok) throw new Error('Personaje no encontrado')
     const data = await resp.json()
     character.value = data
-    // Agregar al historial
     characterStore.addToHistory(data)
   } catch (e: any) {
     errorMsg.value = e.message || 'Error desconocido'
@@ -81,18 +80,20 @@ watch(
 <template>
   <section class="detail">
     <button class="detail__button" @click="router.back()">← Volver</button>
-    <button class="detail__button-favorite" @click="toggleFavorite">
-      {{ isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos' }}
-    </button>
-    <button class="detail__button-history" @click="goToHistory">Ver Historial y Guardados</button>
+
     <div v-if="isLoading" class="detail__loading">Cargando detalles...</div>
 
     <div v-else-if="errorMsg" class="detail__error">{{ errorMsg }}</div>
 
     <article v-else-if="character" class="detail__character">
-      <h1 class="detail__title">{{ character.name }}</h1>
+      <div class="detail__block">
+        <h1 class="detail__title">{{ character.name }}</h1>
 
-      <img class="detail__image" :src="character.image" :alt="character.name" />
+        <img class="detail__image" :src="character.image" :alt="character.name" />
+        <button class="detail__button-favorite" @click="toggleFavorite">
+          {{ isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos' }}
+        </button>
+      </div>
       <ul class="detail__ul">
         <li class="detail__li"><strong>Status:</strong> {{ character.status }}</li>
         <li class="detail__li"><strong>Species:</strong> {{ character.species }}</li>
@@ -112,24 +113,30 @@ watch(
   width: 100%;
 
   &__button {
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
     cursor: pointer;
+    padding: 8px;
+    font-size: 16px;
   }
 
   &__character {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(2, auto);
     gap: 3rem;
-    max-width: 1600px;
     padding: 80px 50px;
-    position: relative;
     align-items: center;
     text-align: center;
   }
-
+  &__block {
+    align-items: center;
+  }
+  &__button-favorite {
+    padding: 20px;
+    display: flex;
+  }
   &__image {
     width: 400px;
-    height: 550px;
+    height: 400px;
     border-radius: 8px;
     margin-bottom: 1rem;
   }

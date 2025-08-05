@@ -3,7 +3,7 @@
     <router-link to="/" class="logo-link">
       <img src="../assets/image/logor.png" alt="logo" class="logo-img" />
     </router-link>
-    <router-link to="/HistoryAndSaves" class="text-link">
+    <router-link to="/historyAndSaves" class="text-link">
       <h1>History and Saves</h1>
     </router-link>
   </header>
@@ -30,5 +30,11 @@
 
 .header__text{
   color:white;
+}
+
+.text-link{
+  color: white;
+  padding-inline: 18px;
+  font-size: 8px;
 }
 </style>

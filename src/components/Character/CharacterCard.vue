@@ -119,7 +119,7 @@ $white: white;
     display: flex;
     justify-content: center;
     padding-bottom: 5px;
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 </style>

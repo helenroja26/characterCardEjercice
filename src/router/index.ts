@@ -8,7 +8,7 @@ import HistoryAndSaves from '@/views/HistoryAndSaves.vue'
 const routes: RouteRecordRaw[] = [
   { path: '/', name: 'Home', component: Home },
   { path: '/detail/:id', name: 'Detail', component: Detail, props: true },
-  { path: '/HistoryAndSaves', name: 'HistoryAndSaves', component: HistoryAndSaves },
+  { path: '/historyAndSaves', name: 'HistoryAndSaves', component: HistoryAndSaves },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
 ]
 

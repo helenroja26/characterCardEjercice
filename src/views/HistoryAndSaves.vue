@@ -94,12 +94,12 @@ function removeFromFavorites(characterId: number) {
 
 <style lang="scss" scoped>
 .history-and-saves {
-  padding: 2rem;
-  min-height: calc(100vh - 160px);
+  padding: 25px;
+  min-height: 100vh;
 
   .back-button {
-    margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
+    margin-bottom: 12px;
+    padding: 8px 12px;
     background-color: #290e8c;
     color: white;
     border: none;
@@ -112,18 +112,18 @@ function removeFromFavorites(characterId: number) {
   }
 
   .debug-info {
-    background: #ffe6e6;
-    padding: 1rem;
+    background: #c5d9fd;
+    padding: 8px;
     border-radius: 4px;
-    margin-bottom: 2rem;
+    margin-bottom: 15px;
   }
 
   section {
-    margin-bottom: 3rem;
+    margin-bottom: 40px;
 
     h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+      font-size: 30px;
+      margin-bottom: 8px;
       color: #290e8c;
     }
   }
@@ -131,7 +131,7 @@ function removeFromFavorites(characterId: number) {
   .empty-state {
     text-align: center;
     color: #666;
-    padding: 2rem;
+    padding: 15px;
     font-style: italic;
     background: #f5f5f5;
     border-radius: 8px;
@@ -140,14 +140,16 @@ function removeFromFavorites(characterId: number) {
   .character-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
+    gap: 12px;
   }
 
   .character-card {
+    width: 100%;
+    height: auto;
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    padding: 10px;
     cursor: pointer;
     transition: transform 0.2s;
 
@@ -160,22 +162,22 @@ function removeFromFavorites(characterId: number) {
       height: 200px;
       object-fit: cover;
       border-radius: 6px;
-      margin-bottom: 0.5rem;
+      margin-bottom: 8px;
     }
 
     h3 {
-      margin: 0.5rem 0;
+      margin: 8px 0;
       color: #290e8c;
     }
 
     p {
       color: #666;
-      margin-bottom: 1rem;
+      margin-bottom: 10px;
     }
 
     .save-btn, .remove-btn {
       width: 100%;
-      padding: 0.5rem;
+      padding: 8px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
