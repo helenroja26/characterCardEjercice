@@ -111,12 +111,17 @@ watch(
 <style scoped lang="scss">
 .detail {
   width: 100%;
+  padding: 25px;
+  min-height: 100vh;
 
   &__button {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background-color: #290e8c;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    padding: 8px;
-    font-size: 16px;
   }
 
   &__character {
