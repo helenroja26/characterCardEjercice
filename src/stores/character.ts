@@ -25,7 +25,6 @@ export const useCharacterStore = defineStore('character', {
   }),
 
   actions: {
-    // Lógica para paginación acumulativa y evitar duplicados en scroll infinito
     async fetchCharacters(page = 1) {
       this.isLoading = true
       this.errorMsg = ''
@@ -45,14 +44,12 @@ export const useCharacterStore = defineStore('character', {
       }
     },
 
-    // Agrega a favoritos con control de límite y retorno booleano
     addToFavorites(character: Character): boolean {
       if (this.favorites.length >= this.SAVE_LIMIT) {
         return false
       }
       if (!this.favorites.find(c => c.id === character.id)) {
         this.favorites.push(character)
-        // Elimina de historial si estaba allí
         this.history = this.history.filter(c => c.id !== character.id)
         return true
       }
@@ -63,7 +60,6 @@ export const useCharacterStore = defineStore('character', {
       this.favorites = this.favorites.filter(c => c.id !== id)
     },
 
-    // Histórico sin duplicados y con límite
     addToHistory(character: Character) {
       if (!this.history.find(c => c.id === character.id) && !this.favorites.find(c => c.id === character.id)) {
         this.history.unshift(character)
