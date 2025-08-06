@@ -166,8 +166,8 @@ watch(
   }
 
   .detail__button-favorite {
-    margin: 1rem 0;
-    padding: 0.5rem 1rem;
+    margin-bottom: 12px;
+    padding: 8px 12px;
     background-color: #290e8c;
     color: white;
     border: none;
