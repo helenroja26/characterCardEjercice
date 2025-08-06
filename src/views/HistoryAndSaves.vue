@@ -142,7 +142,6 @@ function removeFromFavorites(characterId: number) {
     @media (max-width: 661px) {
       grid-template-columns: 1fr;
       padding: 10px;
-      gap: 15px;
     }
     @media (max-width: 950px) {
       grid-template-columns: repeat(2, 1fr);
