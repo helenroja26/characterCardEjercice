@@ -133,10 +133,10 @@ watch(
     text-align: center;
     @media (max-width: 1150px) {
       grid-template-columns: 1fr;
-      padding: 10px;
+      padding: 15px;
       gap: 15px;
+      }
     }
-  }
   &__block {
     align-items: center;
   }
@@ -149,6 +149,10 @@ watch(
     height: 400px;
     border-radius: 8px;
     margin-bottom: 1rem;
+    @media (max-width: 1150px) {
+      width: 300px;
+      height: 300px;
+    }
   }
 
   &__title {
