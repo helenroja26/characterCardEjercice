@@ -1,12 +1,13 @@
+<script setup lang="ts">
+
+
+</script>
 <template>
   <footer class="app__footer">
     <p>© 2024 Rick and Morty App — Created with Vue 3 & TypeScript</p>
   </footer>
 </template>
-<script setup lang="ts">
 
-
-</script>
 
 <style scoped lang="scss" >
 .app__footer {

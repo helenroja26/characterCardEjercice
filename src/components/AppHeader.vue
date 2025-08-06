@@ -1,3 +1,7 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
   <header class="app_header">
     <router-link to="/" class="logo-link">
@@ -9,9 +13,7 @@
   </header>
 </template>
 
-<script setup lang="ts">
 
-</script>
 
 <style scoped lang="scss">
 .app_header{

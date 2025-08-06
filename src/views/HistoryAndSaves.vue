@@ -1,3 +1,35 @@
+
+
+<script lang="ts" setup>
+import { useCharacterStore } from '@/stores/character'
+import { useRouter } from 'vue-router'
+
+const characterStore = useCharacterStore()
+const router = useRouter()
+
+function goToDetail(characterId: number) {
+  router.push({ name: 'Detail', params: { id: characterId.toString() } })
+}
+
+function isFavorite(characterId: number): boolean {
+  return characterStore.favorites.some(c => c.id === characterId)
+}
+
+function toggleFavorite(character: any) {
+  if (isFavorite(character.id)) {
+    characterStore.removeFromFavorites(character.id)
+  } else {
+    const added = characterStore.addToFavorites(character)
+    if (!added) {
+      alert('Has alcanzado el límite de 10 favoritos.')
+    }
+  }
+}
+
+function removeFromFavorites(characterId: number) {
+  characterStore.removeFromFavorites(characterId)
+}
+</script>
 <template>
   <div class="history-and-saves">
     <button class="back-button" @click="$router.back()">← Volver</button>
@@ -58,42 +90,9 @@
     </section>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { useCharacterStore } from '@/stores/character'
-import { useRouter } from 'vue-router'
-
-const characterStore = useCharacterStore()
-const router = useRouter()
-
-function goToDetail(characterId: number) {
-  router.push({ name: 'Detail', params: { id: characterId.toString() } })
-}
-
-function isFavorite(characterId: number): boolean {
-  return characterStore.favorites.some(c => c.id === characterId)
-}
-
-function toggleFavorite(character: any) {
-  if (isFavorite(character.id)) {
-    characterStore.removeFromFavorites(character.id)
-  } else {
-    const added = characterStore.addToFavorites(character)
-    if (!added) {
-      alert('Has alcanzado el límite de 10 favoritos.')
-    }
-  }
-}
-
-function removeFromFavorites(characterId: number) {
-  characterStore.removeFromFavorites(characterId)
-}
-</script>
-
 <style lang="scss" scoped>
 .history-and-saves {
   padding: 25px;
-  min-height: 100vh;
 
   .back-button {
     margin-bottom: 12px;
@@ -139,9 +138,10 @@ function removeFromFavorites(characterId: number) {
     display: grid;
     grid-template-columns: repeat(5,1fr);
     gap: 15px;
-    @media (max-width: 661px) {
+    @media (max-width: 650px) {
       grid-template-columns: 1fr;
       padding: 10px;
+      gap: 15px;
     }
     @media (max-width: 950px) {
       grid-template-columns: repeat(2, 1fr);
@@ -149,11 +149,11 @@ function removeFromFavorites(characterId: number) {
       gap: 15px;
     }
 
-    @media (min-width: 951px) and (max-width: 1150px) {
+    @media (min-width: 951px) and (max-width: 1250px) {
       grid-template-columns: repeat(3, 1fr);
     }
 
-    @media (min-width: 1151px) and (max-width: 1560px) {
+    @media (min-width: 1251px) and (max-width: 1400px) {
       grid-template-columns: repeat(4, 1fr);
     }
   }
