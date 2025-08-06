@@ -126,7 +126,7 @@ watch(
 
   &__character {
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
     gap: 3rem;
     padding: 80px 50px;
     align-items: center;
