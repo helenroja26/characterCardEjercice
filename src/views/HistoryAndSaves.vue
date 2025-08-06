@@ -32,16 +32,16 @@ function removeFromFavorites(characterId: number) {
 </script>
 <template>
   <div class="history-and-saves">
-    <button class="back-button" @click="$router.back()">← Volver</button>
+    <button class="back-button" @click="$router.back()">← Back</button>
     <div class="debug-info">
-      <p>Historia: {{ characterStore.history.length }} elementos</p>
-      <p>Guardados: {{ characterStore.favorites.length }} elementos</p>
+      <p>History: {{ characterStore.history.length }} elements</p>
+      <p>Favorites: {{ characterStore.favorites.length }} elements</p>
     </div>
 
     <section class="history-section">
-      <h2>Historia</h2>
+      <h2>History</h2>
       <div v-if="characterStore.history.length === 0" class="empty-state">
-        No hay personajes en el historial
+        No characters in history
       </div>
       <div v-else class="character-grid">
         <div
@@ -58,16 +58,16 @@ function removeFromFavorites(characterId: number) {
             class="save-btn"
             :class="{ 'is-saved': isFavorite(character.id) }"
           >
-            {{ isFavorite(character.id) ? 'Guardado' : 'Guardar' }}
+            {{ isFavorite(character.id) ? 'Saved' : 'Save' }}
           </button>
         </div>
       </div>
     </section>
 
     <section class="saves-section">
-      <h2>Guardados</h2>
+      <h2>Favorites</h2>
       <div v-if="characterStore.favorites.length === 0" class="empty-state">
-        No hay personajes guardados
+        No characters in favorites
       </div>
       <div v-else class="character-grid">
         <div
@@ -83,7 +83,7 @@ function removeFromFavorites(characterId: number) {
             @click.stop="removeFromFavorites(character.id)"
             class="remove-btn"
           >
-            Eliminar
+            Remove
           </button>
         </div>
       </div>

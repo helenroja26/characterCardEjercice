@@ -39,7 +39,7 @@ onMounted(fetchCharacters)
 
 <template>
   <section class="home">
-    <div v-if="isLoading" class="home__loading">Cargando personajes...</div>
+    <div v-if="isLoading" class="home__loading">Loading characters...</div>
     <div v-else-if="errorMsg" class="home__error">{{ errorMsg }}</div>
     <div v-else class="home__list">
       <router-link

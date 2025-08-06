@@ -21,10 +21,6 @@ const characterStore = useCharacterStore()
 const route = useRoute()
 const router = useRouter()
 
-function goToHistory() {
-  router.push({ name: 'HistoryAndSaves' })
-}
-
 const id = ref(route.params.id as string)
 const character = ref<Character | null>(null)
 const isLoading = ref(true)
@@ -35,12 +31,12 @@ async function fetchCharacterData(characterId: string) {
   errorMsg.value = ''
   try {
     const resp = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
-    if (!resp.ok) throw new Error('Personaje no encontrado')
+    if (!resp.ok) throw new Error('character not found')
     const data = await resp.json()
     character.value = data
     characterStore.addToHistory(data)
   } catch (e: any) {
-    errorMsg.value = e.message || 'Error desconocido'
+    errorMsg.value = e.message || 'Unknown error'
   } finally {
     isLoading.value = false
   }
@@ -58,7 +54,7 @@ function toggleFavorite() {
   } else {
     const added = characterStore.addToFavorites(character.value)
     if (!added) {
-      alert('Has alcanzado el límite de 10 favoritos.')
+      alert('You have reached the limit of 10 favorites.')
     }
   }
 }
@@ -79,9 +75,9 @@ watch(
 </script>
 <template>
   <section class="detail">
-    <button class="detail__button" @click="router.back()">← Volver</button>
+    <button class="detail__button" @click="router.back()">← Back</button>
 
-    <div v-if="isLoading" class="detail__loading">Cargando detalles...</div>
+    <div v-if="isLoading" class="detail__loading">Loading details...</div>
 
     <div v-else-if="errorMsg" class="detail__error">{{ errorMsg }}</div>
 
@@ -91,7 +87,7 @@ watch(
 
         <img class="detail__image" :src="character.image" :alt="character.name" />
         <button class="detail__button-favorite" @click="toggleFavorite">
-          {{ isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos' }}
+          {{ isFavorite ? 'Remove from favorites' : 'Save to favorites' }}
         </button>
       </div>
       <ul class="detail__ul">
