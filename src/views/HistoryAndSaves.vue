@@ -1,8 +1,6 @@
 <template>
   <div class="history-and-saves">
     <button class="back-button" @click="$router.back()">← Volver</button>
-
-    <!-- Debug info -->
     <div class="debug-info">
       <p>Historia: {{ characterStore.history.length }} elementos</p>
       <p>Guardados: {{ characterStore.favorites.length }} elementos</p>
@@ -139,15 +137,33 @@ function removeFromFavorites(characterId: number) {
 
   .character-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(5,1fr);
+    gap: 15px;
+    @media (max-width: 661px) {
+      grid-template-columns: 1fr;
+      padding: 10px;
+      gap: 15px;
+    }
+    @media (max-width: 950px) {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 10px;
+      gap: 15px;
+    }
+
+    @media (min-width: 951px) and (max-width: 1150px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 1151px) and (max-width: 1560px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   .character-card {
-    width: 100%;
-    height: auto;
-    background: white;
-    border-radius: 8px;
+    width: 300px;
+    height: 350px;
+    background: #4DCD91;
+    border-radius: 45px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 10px;
     cursor: pointer;
@@ -161,7 +177,7 @@ function removeFromFavorites(characterId: number) {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      border-radius: 6px;
+      border-radius: 65px;
       margin-bottom: 8px;
     }
 
@@ -179,7 +195,7 @@ function removeFromFavorites(characterId: number) {
       width: 100%;
       padding: 8px;
       border: none;
-      border-radius: 4px;
+      border-radius: 45px;
       cursor: pointer;
       font-weight: 500;
     }

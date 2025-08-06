@@ -126,11 +126,16 @@ watch(
 
   &__character {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+    grid-template-columns: repeat(2,1fr);
     gap: 3rem;
-    padding: 80px 50px;
+    padding: 15px;
     align-items: center;
     text-align: center;
+    @media (max-width: 1150px) {
+      grid-template-columns: 1fr;
+      padding: 10px;
+      gap: 15px;
+    }
   }
   &__block {
     align-items: center;
