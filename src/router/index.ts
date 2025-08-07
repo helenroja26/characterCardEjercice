@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import Home from '@/views/Home.vue'
-import NotFound from '@/views/NotFound.vue'
-import Detail from '@/views/Detail.vue'
-import HistoryAndSaves from '@/views/HistoryAndSaves.vue'
+import HomeView from '@/views/HomeView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
+import DetailView from '@/views/DetailView.vue'
+import HistoryAndSavesView from '@/views/HistoryAndSavesView.vue'
 
 const routes: RouteRecordRaw[] = [
-  { path: '/', name: 'Home', component: Home },
-  { path: '/detail/:id', name: 'Detail', component: Detail, props: true },
-  { path: '/historyAndSaves', name: 'HistoryAndSaves', component: HistoryAndSaves },
-  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
+  { path: '/', name: 'Home', component: HomeView },
+  { path: '/detail/:id', name: 'Detail', component: DetailView },
+  { path: '/historyAndSaves', name: 'HistoryAndSaves', component: HistoryAndSavesView },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFoundView },
 ]
 
 const router = createRouter({

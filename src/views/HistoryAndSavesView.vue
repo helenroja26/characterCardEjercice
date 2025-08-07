@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { useCharacterStore } from '@/stores/character'
+import { useCharacterStore } from '@/stores/useCharacterStore.ts'
 import { useRouter } from 'vue-router'
+import type { CharacterModel } from '@/models/CharacterModel.ts'
 
 const characterStore = useCharacterStore()
 const router = useRouter()
@@ -13,7 +14,7 @@ function isFavorite(characterId: number): boolean {
   return characterStore.favorites.some(c => c.id === characterId)
 }
 
-function toggleFavorite(character: any) {
+function toggleFavorite(character: CharacterModel ) {
   if (isFavorite(character.id)) {
     characterStore.removeFromFavorites(character.id)
   } else {
@@ -90,7 +91,7 @@ function removeFromFavorites(characterId: number) {
 </template>
 <style lang="scss" scoped>
 .history-and-saves {
-  padding: 25px;
+  padding: 15px;
 
   .back-button {
     margin-bottom: 12px;
@@ -136,6 +137,7 @@ function removeFromFavorites(characterId: number) {
     display: grid;
     grid-template-columns: repeat(5,1fr);
     gap: 15px;
+    justify-items: center;
     @media (max-width: 650px) {
       grid-template-columns: 1fr;
       padding: 10px;

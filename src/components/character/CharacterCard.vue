@@ -1,16 +1,13 @@
 <script setup lang="ts">
-interface CharacterCardProps {
-  name: string
-  image: string
-  status: string
-  species: string
-  gender: string
-  location: string
-  type: string | null
-  origin: string
-  created: string
-}
-defineProps<CharacterCardProps>()
+import type { CharacterModel } from '@/models/CharacterModel.ts'
+import type { PropType } from 'vue'
+import { computed } from 'vue'
+const props = defineProps ({
+  character: {
+    type: Object as PropType <CharacterModel>,
+    required: true,
+  },
+})
 
 function formatDate(dateString: string): string {
   const options: Intl.DateTimeFormatOptions = {
@@ -20,32 +17,33 @@ function formatDate(dateString: string): string {
   }
   return new Date(dateString).toLocaleDateString('en-EN', options)
 }
+const dateFormat = computed(() => formatDate(props.character.created))
 </script>
 
 <template>
   <article class="card" @click="$emit('click')" role="button" tabindex="0">
     <header class="card__title">
-      <h2 class="title__name">{{ name }}</h2>
+      <h2 class="title__name">{{ character.name }}</h2>
     </header>
     <section class="card__image">
-      <img class="card__image--img" :src="image" :alt="name" />
+      <img class="card__image--img" :src="character.image" :alt="character.name" />
     </section>
     <section class="card__description">
       <p class="card__description__container card__description__container--red">
-        <span class="row1a">Status: {{ status }} </span>
-        <span class="row1b">Species: {{ species }}</span>
+        <span class="row1a">Status: {{ character.name }} </span>
+        <span class="row1b">Species: {{ character.species }}</span>
       </p>
       <p class="card__description__container card__description__container--blue">
-        <span class="row2a">Gender: {{ gender }}</span>
-        <span class="row2b">Location: {{ location }}</span>
+        <span class="row2a">Gender: {{ character.gender }}</span>
+        <span class="card__description__container--span">Location: {{ character.location.name }}</span>
       </p>
       <p class="card__description__container card__description__container--green">
-        <span class="row3a">Type: {{ type || 'N/A' }}</span>
-        <span class="row3b">Origin: {{ origin }}</span>
+        <span class="row3a">Type: {{ character.type || 'N/A' }}</span>
+        <span class="row3b">Origin: {{ character.origin.name }}</span>
       </p>
     </section>
     <footer class="card__end">
-      <span>Created: {{ formatDate(created) }}</span>
+      <span>Created: {{ dateFormat }}</span>
     </footer>
   </article>
 </template>
@@ -99,6 +97,10 @@ $white: white;
       padding: 2px 6px;
       display: flex;
       justify-content: space-between;
+
+      &--span {
+        text-align: end;
+      }
 
       &--red {
         background-color: #c96363;

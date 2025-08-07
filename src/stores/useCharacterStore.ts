@@ -1,23 +1,10 @@
 import { defineStore } from 'pinia'
-
-export interface Character {
-  id: number;
-  name: string;
-  image: string;
-  status: string;
-  species: string;
-  gender: string;
-  location: { name: string };
-  type: string;
-  origin: { name: string };
-  created: string;
-}
-
+import type { CharacterModel } from '@/models/CharacterModel.ts'
 export const useCharacterStore = defineStore('character', {
   state: () => ({
-    characters: [] as Character[],
-    favorites: [] as Character[],
-    history: [] as Character[],
+    characters: [] as CharacterModel [],
+    favorites: [] as CharacterModel [],
+    history: [] as CharacterModel [],
     isLoading: false,
     errorMsg: '',
     SAVE_LIMIT: 10,
@@ -46,7 +33,7 @@ export const useCharacterStore = defineStore('character', {
         if (!resp.ok) throw new Error('Error fetching characters')
         const data = await resp.json()
 
-        const newCharacters = data.results.filter((newChar: Character) =>
+        const newCharacters = data.results.filter((newChar: CharacterModel) =>
           !this.characters.some(existing => existing.id === newChar.id)
         )
 
@@ -65,7 +52,7 @@ export const useCharacterStore = defineStore('character', {
       }
     },
 
-    addToFavorites(character: Character): boolean {
+    addToFavorites(character: CharacterModel): boolean {
       const alreadyFavorite = this.favorites.some(c => c.id === character.id)
 
       if (this.favorites.length >= this.SAVE_LIMIT) {
@@ -85,7 +72,7 @@ export const useCharacterStore = defineStore('character', {
       this.favorites = this.favorites.filter(c => c.id !== id)
     },
 
-    addToHistory(character: Character) {
+    addToHistory(character: CharacterModel) {
       const alreadyInHistory = this.history.some(c => c.id === character.id)
       const alreadyFavorite = this.favorites.some(c => c.id === character.id)
 

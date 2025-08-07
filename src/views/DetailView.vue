@@ -1,28 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useCharacterStore } from '@/stores/character.ts'
-
-interface Character {
-  id: number
-  name: string
-  image: string
-  status: string
-  species: string
-  gender: string
-  location: { name: string }
-  type: string
-  origin: { name: string }
-  created: string
-  episode: [string]
-}
+import { useCharacterStore } from '@/stores/useCharacterStore.ts'
+import type { CharacterModel } from '@/models/CharacterModel.ts'
 
 const characterStore = useCharacterStore()
 const route = useRoute()
 const router = useRouter()
 
 const id = ref(route.params.id as string)
-const character = ref<Character | null>(null)
+const character = ref<CharacterModel | null>(null)
 const isLoading = ref(true)
 const errorMsg = ref('')
 
@@ -107,8 +94,7 @@ watch(
 <style scoped lang="scss">
 .detail {
   width: 100%;
-  padding: 25px;
-  min-height: 100vh;
+  padding: 15px;
 
   &__button {
     margin-bottom: 12px;
@@ -123,13 +109,14 @@ watch(
   &__character {
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    gap: 3rem;
+    gap: 20px;
     padding: 15px;
     align-items: center;
     text-align: center;
+    justify-items: center;
     @media (max-width: 1150px) {
       grid-template-columns: 1fr;
-      padding: 15px;
+      padding: 10px;
       gap: 15px;
       }
     }
@@ -137,7 +124,7 @@ watch(
     align-items: center;
   }
   &__button-favorite {
-    padding: 20px;
+    padding: 10px;
     display: flex;
   }
   &__image {
@@ -146,8 +133,8 @@ watch(
     border-radius: 8px;
     margin-bottom: 1rem;
     @media (max-width: 1150px) {
-      width: 300px;
-      height: 300px;
+      width: 280px;
+      height: 280px;
     }
   }
 
@@ -161,7 +148,7 @@ watch(
   }
 
   &__li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 5px;
     border: 3px solid #290e8c;
     background-color: #d7e5f4;
 
@@ -185,8 +172,8 @@ watch(
   }
 
   &__button-history {
-    margin: 1rem 0 2rem;
-    padding: 0.5rem 1.2rem;
+    margin: 10px 0 20px;
+    padding: 5px 12px;
     background-color: #2a74d7;
     color: white;
     border: none;

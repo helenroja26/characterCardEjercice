@@ -1,6 +1,4 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <header class="app_header">
@@ -13,10 +11,8 @@
   </header>
 </template>
 
-
-
 <style scoped lang="scss">
-.app_header{
+.app_header {
   width: 100%;
   height: 70px;
   background: #2c3e50;
@@ -25,16 +21,20 @@
   align-items: center;
 }
 
-.logo-img{
-  width:300px;
-  height:60px;
+.logo-img {
+  width: 300px;
+  height: 60px;
+  @media (max-width: 550px) {
+    width: 180px;
+    height: 38px;
+  }
+  }
+
+.header__text {
+  color: white;
 }
 
-.header__text{
-  color:white;
-}
-
-.text-link{
+.text-link {
   color: white;
   padding-inline: 18px;
   font-size: 8px;

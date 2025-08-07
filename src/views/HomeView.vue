@@ -1,21 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import CharacterCard from '@/components/Character/CharacterCard.vue'
+import CharacterCard from '@/components/character/CharacterCard.vue'
+import type { CharacterModel } from '@/models/CharacterModel.ts'
 
-export interface Character {
-  id: number
-  name: string
-  image: string
-  status: string
-  species: string
-  gender: string
-  location: { name: string }
-  type: string
-  origin: { name: string }
-  created: string
-}
-
-const characters = ref<Character[]>([])
+const characters = ref<CharacterModel[]>([])
 const isLoading = ref(true)
 const errorMsg = ref('')
 
@@ -24,7 +12,11 @@ async function fetchCharacters() {
   errorMsg.value = ''
   try {
     const resp = await fetch('https://rickandmortyapi.com/api/character?page=1')
-    if (!resp.ok) throw new Error('Error fetching characters')
+    //if (!resp.ok) throw new Error('Error fetching characters'
+    if (!resp.ok) {
+      console.log('Error fetching characters')
+      return
+    }
     const data = await resp.json()
     characters.value = data.results
   } catch (e: any) {
@@ -49,15 +41,6 @@ onMounted(fetchCharacters)
         class="card-link"
       >
         <CharacterCard
-          :name="char.name"
-          :image="char.image"
-          :status="char.status"
-          :species="char.species"
-          :gender="char.gender"
-          :location="char.location.name"
-          :type="char.type"
-          :origin="char.origin.name"
-          :created="char.created.split('T')[0]"
           :character="char"
         />
       </router-link>
