@@ -17,7 +17,7 @@
   text-align: center;
   font-weight: bold;
   border-top: 4px solid #4dcd91;
-
+  padding: 10px;
 }
 
 </style>

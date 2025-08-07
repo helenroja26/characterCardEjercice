@@ -19,6 +19,7 @@
   display: flex;
   grid-template-columns: repeat(8, 1fr);
   align-items: center;
+  padding: 10px;
 }
 
 .logo-img {
