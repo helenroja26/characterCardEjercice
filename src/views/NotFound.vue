@@ -4,9 +4,9 @@
 
 <template>
   <div class="not-found">
-    <h2>404 - Página no encontrada</h2>
-    <p>La ruta que intentaste visitar no existe.
-      <router-link to="/">Volver al inicio</router-link>
+    <h2>404 - Page not found</h2>
+    <p>The route you tried to visit does not exist.
+      <router-link to="/">Return to home</router-link>
     </p>
   </div>
 </template>

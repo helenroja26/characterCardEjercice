@@ -59,7 +59,7 @@ export const useCharacterStore = defineStore('character', {
         this.currentPage = page
         this.hasMore = Boolean(data.info?.next)
       } catch (e: any) {
-        this.errorMsg = e.message || 'Error desconocido'
+        this.errorMsg = e.message || 'Unknow error'
       } finally {
         this.isLoading = false
       }

@@ -1,5 +1,3 @@
-
-
 <script lang="ts" setup>
 import { useCharacterStore } from '@/stores/character'
 import { useRouter } from 'vue-router'
@@ -21,7 +19,7 @@ function toggleFavorite(character: any) {
   } else {
     const added = characterStore.addToFavorites(character)
     if (!added) {
-      alert('Has alcanzado el límite de 10 favoritos.')
+      alert('You have reached the limit of 10 favorites.')
     }
   }
 }
